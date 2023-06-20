@@ -16,6 +16,11 @@ pip install werkzeug
 npm install crypto-js
 ...
 ```
+```bash
+flask db init
+flask db migrate
+flask db upgrade
+```
 
 ### useage
 
