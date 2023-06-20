@@ -85,7 +85,7 @@
             event.preventDefault(); // 阻止表单默认提交行为
             var query = form.elements["query"].value;
             var content = $('#content');
-            content.html('<section><span class="loader-1"> </span></section>'); // 显示加载动画
+            content.html('<section><span class="loader"> </span></section>'); // 显示加载动画
             $.ajax({
                 url: '/music/search',
                 method: "POST",

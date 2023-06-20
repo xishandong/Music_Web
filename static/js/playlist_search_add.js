@@ -16,7 +16,7 @@ $(document).ready(function () {
         event.preventDefault();
         var query = form.elements["query"].value;
         var load = $('.show-load');
-        load.html('<section><span class="loader-1"> </span></section>');
+        load.html('<section><span class="loader"> </span></section>');
         content = $('.song-content')
         content.html('');
         $.ajax({
