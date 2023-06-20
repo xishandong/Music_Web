@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="right-area-upper">
+        <div class="search-part-wrapper">
+            <h3 style="padding-bottom: 10px;padding-top: 10px;text-align: center;">我的歌单</h3>
+        </div>
+        <div class="action-buttons-wrapper">
+            <button class="action-buttons btn-add" data-toggle="modal" data-target="#createPlaylistModal2">新建歌单
+            </button>
+        </div>
+    </div>
+
+    <!-- 新建歌单栏 -->
+    {% if user %}
+        <div class="song-content">
+            <div class="song" href="{{ url_for('music.collected') }}">
+                <div class="image-container">
+                    {% if user.songs %}
+                        <img src="{{ user.songs[0].cover_url }}" alt="Your Image">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='img/default_cover.png') }}" alt="Your Image">
+                    {% endif %}
+                    <div class="overlay">
+                        <span class="small-heart"></span>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="title">我的收藏</div>
+                    <div class="artist1" style="max-width: 100%">这个歌单存放了你的收藏歌曲~</div>
+                    <div class="fd">建立者: {{ user.username }}</div>
+                </div>
+            </div>
+            {% if user.playlists %}
+                {% for i in user.playlists %}
+                    <div class="song" data-id="{{ i.id }}" href="/user/playlist_index/{{ i.id }}">
+                        <img src="{{ url_for('static', filename=i.cover) }}" alt="">
+                        <div class="info">
+                            <div class="title">{{ i.name }}</div>
+                            <div class="artist1">{{ i.description }}</div>
+                            <p class="fd">建立者: {{ user.username }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="modal fade" id="createPlaylistModal2" tabindex="-1" role="dialog"
+             aria-labelledby="createPlaylistModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createPlaylistModalLabel2">新建歌单</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createPlaylistForm">
+                            <div class="row">
+                                <input type="text" class="form-control" id="playlistName" name="playlistName" required
+                                       placeholder="请输入歌单名称...">
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <input type="text" class="form-control" id="playlistDesc" name="playlistDesc"
+                                       placeholder="请输入歌单描述...">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="createPlaylistButton2">创建</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1 style="margin-top: 20%;color:#FF3D00;">登陆后查看</h1>
+    {% endif %}
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/create_playlist.js') }}"></script>
+{% endblock %}

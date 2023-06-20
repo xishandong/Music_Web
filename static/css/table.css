@@ -1,0 +1,96 @@
+.song-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex; /* 添加 */
+    flex-wrap: wrap; /* 添加 */
+}
+
+.song {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    width: 100%;
+    flex-basis: calc(33.33% - 20px); /* 添加 */
+}
+
+/* 修改全局样式 */
+*,
+*:before,
+*:after,
+*:focus,
+*:hover {
+    /* 修改盒模型样式 */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@keyframes spin-art {
+    /* 修改动画关键帧的样式 */
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.song:hover {
+    background: rgb(231, 160, 160);
+}
+
+.song img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.song .info {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.song .info .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.song .info .artist {
+    color: #666;
+}
+.song .info .artist1 {
+    color: #666;
+    max-width: 200px;
+    max-height: 25px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.delete-icon {
+    float: bottom;
+    color: transparent;
+}
+
+
+.song:hover .delete-icon {
+    color: #ff0000;
+    font-size: x-large;
+}
+
+
+.song:hover .play-btn {
+    color: red;
+    font-size: x-large;
+}
+
+.fd {
+    margin-top: 10px;
+    font-size: 0.75em;
+    color: #dd5555;
+}

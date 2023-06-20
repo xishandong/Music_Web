@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="right-area-upper">
+        <h3 style="padding-bottom: 10px;padding-top: 10px;text-align: center;">我的推荐</h3>
+    </div>
+    {% if songs %}
+        <div class="card-container">
+            {% for song in songs %}
+                <div class="card">
+                    <div class="box">
+                        <div class="content">
+                            <h2>{{ song.name }}<br><span>{{ song.singer }}</span></h2>
+                            <ul>
+                                <li>歌曲id<span>{{ song.id }}</span></li>
+                                <li>情感值<span>{{ song.score }}</span></li>
+                                <li>推荐指数<span>{{ (10 - ((score - song.score | float) | abs | round(2) )) | round(2) }}</span></li>
+                            </ul>
+                            <div class="button-container">
+                                <button class="re-play" data-song-id="{{ song.id }}" data-song-type="wy"
+                                        data-song-singer="{{ song.singer }}"
+                                        data-song-cover="{{ song.cover_url }}"
+                                        data-song-name="{{ song.name }}"><i class="fa fa-play"></i></button>
+                                <button class="re-col" data-song-id="{{ song.id }}" data-song-type="wy"
+                                        data-song-singer="{{ song.singer }}"
+                                        data-song-cover="{{ song.cover_url }}"
+                                        data-song-name="{{ song.name }}"><i class="fa fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="circle">
+                        <div class="imgBx">
+                            <img src="{{ song.cover_url }}" alt="">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1 style="margin-top: 20%;color:#FF3D00;">登陆后查看</h1>
+    {% endif %}
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/re_js.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <style>
+        .collect {
+            float: right;
+            font-size: large;
+        }
+
+        .song:hover .collect {
+            color: #ff0000;
+            font-size: x-large;
+        }
+        .add {
+            float: right;
+            font-size: large;
+        }
+
+        .song:hover .add {
+            color: #ff0000;
+            font-size: x-large;
+        }
+    </style>
+    <div class="right-area-upper">
+        <div class="container11">
+            <a href="/user/playlist_index/{{ id }}" class="back"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="search-part-wrapper">
+            <form id="search-form" class="search-part-wrapper" action="{{ url_for('user.search_add') }}">
+                <input class="search-input" type="text" placeholder="搜索歌曲......" name="query">
+            </form>
+        </div>
+    </div>
+    <div class="show-load" style="position:absolute;top: 40%;left: 50%;"></div>
+    <div class="song-content">
+    </div>
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/playlist_search_add.js') }}"></script>
+{% endblock %}

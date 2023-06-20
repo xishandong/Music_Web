@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>musicm</title>
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icon.webp') }}">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/playlist.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/playlist_index.css') }}">
+    <link href="{{ url_for('static', filename='css/table.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/play.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/recommend.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div class="app-wrapper">
+    <div class="left-area hide-on-mobile">
+        <div class="app-header">
+            <button class="close-menu">
+                <svg width="24" height="24" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round"
+                     stroke-width="2" class="feather feather-x">
+                    <defs></defs>
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="left-area-content" id="navbar">
+            <div class="profile">
+                {% if user %}
+                    {% if user.avatar %}
+                        <img id="avatar" src="{{ url_for('static', filename=user.avatar) }}"
+                             alt="暂无头像">
+                    {% else %}
+                        <img id="avatar" src="{{ url_for('static', filename='img/profile.webp') }}"
+                             alt="暂无头像">
+                    {% endif %}
+                    <div class="profile-info">
+                        <span class="profile-name">{{ user.username }}</span>
+                    </div>
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/profile.webp') }}"
+                         alt="暂无头像">
+                    <div class="profile-info">
+                        <span class="profile-name">游客</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="page-link-list">
+                <a href="{{ url_for('hello_world') }}" class="item-link" id="pageLink">
+                    <svg class="link-icon feather feather-home" fill="none" stroke="currentColor" stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                        <defs></defs>
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        <path d="M9 22V12h6v10"></path>
+                    </svg>
+                    主页
+                </a>
+                <a href="{{ url_for('user.playlists') }}" class="item-link icon-fill" id="pageLink">
+                    <svg t="1686879185629" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="2595" width="20" height="20">
+                        <path d="M964.608 234.496c-46.08-52.565333-104.789333-93.696-169.642667-118.784a34.030933 34.030933 0 0 0-46.421333 31.744v420.352a178.005333 178.005333 0 0 0-110.933333-38.741333c-98.816 0-179.2 80.384-179.2 179.2S538.794667 887.466667 637.610667 887.466667s179.2-80.384 179.2-179.2c0-1.877333-0.170667-3.754667-0.341334-5.632 0-1.024 0.341333-1.877333 0.341334-2.901334V201.216c36.181333 20.309333 69.12 46.933333 96.597333 78.165333 12.458667 14.165333 34.133333 15.530667 48.128 3.072 14.165333-12.288 15.530667-33.792 3.072-47.957333zM637.610667 819.2c-61.098667 0-110.933333-49.834667-110.933334-110.933333s49.834667-110.933333 110.933334-110.933334 110.933333 49.834667 110.933333 110.933334-49.834667 110.933333-110.933333 110.933333zM185.344 307.2h392.533333c18.773333 0 34.133333-15.36 34.133334-34.133333s-15.36-34.133333-34.133334-34.133334h-392.533333a34.133333 34.133333 0 1 0 0 68.266667zM424.277333 460.8h-238.933333c-18.773333 0-34.133333 15.36-34.133333 34.133333s15.36 34.133333 34.133333 34.133334h238.933333c18.773333 0 34.133333-15.36 34.133334-34.133334s-15.36-34.133333-34.133334-34.133333zM321.877333 682.666667h-136.533333c-18.773333 0-34.133333 15.36-34.133333 34.133333s15.36 34.133333 34.133333 34.133333h136.533333c18.773333 0 34.133333-15.36 34.133334-34.133333s-15.36-34.133333-34.133334-34.133333z"
+                              fill="#fc7676" p-id="2596"></path>
+                    </svg>
+                    我的歌单
+                </a>
+                <a href="{{ url_for('music.playlist') }}" class="item-link" id="pageLink">
+                    <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path>
+                    </svg>
+                    播放列表
+                </a>
+                <a href="{{ url_for("music.now") }}" class="item-link" id="pageLink">
+                    <svg class="link-icon feather feather-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 3l14 9-14 9V3z"></path>
+                    </svg>
+                    当前播放
+                </a>
+                <a href="{{ url_for('user.hs') }}" class="item-link" id="pageLink">
+                    <svg class="link-icon feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="16"
+                         height="16" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    播放历史
+                </a>
+                <a href="{{ url_for('user.recommend') }}" class="item-link" id="pageLink">
+                    <svg class="link-icon feather feather-star" xmlns="http://www.w3.org/2000/svg" width="16"
+                         height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <polygon
+                                points="12 2 15.09 8.36 22 9.82 17 14 18.18 21.23 12 18.36 5.82 21.23 7 14 2 9.82 8.91 8.36 12 2"></polygon>
+                    </svg>
+                    推荐歌曲
+                </a>
+                {% if not user %}
+                    <a href="{{ url_for('user.login') }}" class="item-link" id="pageLink">
+                        <svg class="link-icon feather feather-user" xmlns="http://www.w3.org/2000/svg" width="16"
+                             height="16" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M12 2c-3.318 0-6 2.682-6 6 0 2.767 1.794 5.106 4.284 5.932-.04.512-.284.981-.664 1.361a.396.396 0 0 1-.293.122c-.402-.047-.678-.407-.637-.811C6.877 15.566 8.963 14 12 14c3.037 0 5.123 1.566 5.31 3.604.041.404-.235.764-.637.811a.397.397 0 0 1-.293-.122 2.989 2.989 0 0 1-.664-1.361C18.206 13.106 20 10.767 20 8c0-3.318-2.682-6-6-6zm0 2c2.22 0 4 1.78 4 4 0 2.22-1.78 4-4 4s-4-1.78-4-4c0-2.22 1.78-4 4-4zm0 12c-2.667 0-8 1.337-8 4v2h16v-2c0-2.663-5.333-4-8-4zm-6-4v2h12v-2c0-2.21-1.79-4-4-4h-4c-2.21 0-4 1.79-4 4z"></path>
+                        </svg>
+                        登录
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('user.logout') }}" class="item-link" id="pageLink">
+                        <svg class="link-icon feather feather-user" xmlns="http://www.w3.org/2000/svg" width="16"
+                             height="16" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path d="M12 2c-3.318 0-6 2.682-6 6 0 2.767 1.794 5.106 4.284 5.932-.04.512-.284.981-.664 1.361a.396.396 0 0 1-.293.122c-.402-.047-.678-.407-.637-.811C6.877 15.566 8.963 14 12 14c3.037 0 5.123 1.566 5.31 3.604.041.404-.235.764-.637.811a.397.397 0 0 1-.293-.122 2.989 2.989 0 0 1-.664-1.361C18.206 13.106 20 10.767 20 8c0-3.318-2.682-6-6-6zm0 2c2.22 0 4 1.78 4 4 0 2.22-1.78 4-4 4s-4-1.78-4-4c0-2.22 1.78-4 4-4zm0 12c-2.667 0-8 1.337-8 4v2h16v-2c0-2.663-5.333-4-8-4zm-6-4v2h12v-2c0-2.21-1.79-4-4-4h-4c-2.21 0-4 1.79-4 4z"></path>
+                        </svg>
+                        登出
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="right-area" id="content">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+<div class="app-wrapper" style="height: 120px;width: 100%;">
+    <div class="right-area" style="width: 100%;">
+        <!-- Aplayer部分 -->
+        <div id="aplayer" style="width: 1435px;height: 125px;"></div>
+        <button id="clear-btn"><i class="fa fa-trash-o"></i></button>
+    </div>
+</div>
+<!-- 消息弹窗 -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messageModalLabel">消息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer base">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 上传头像 -->
+<input type="file" id="fileInput" style="display: none;">
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+<script src="{{ url_for('static', filename='js/play.js') }}"></script>
+<script src="{{ url_for('static', filename='js/play_index.js') }}"></script>
+<script>
+    window.addEventListener('unload', function () {
+        localStorage.setItem('aplayer', JSON.stringify(window.ap.list.audios));
+        localStorage.setItem('aplayerIndex', JSON.stringify(window.ap.list.index))
+    });
+    $(document).ready(function () {
+        try {
+            var avatar = $("#avatar")
+            avatar.click(function () {
+                $("#fileInput").click();
+            });
+            $("#fileInput").change(function () {
+                var fileInput = document.getElementById("fileInput");
+                var file = fileInput.files[0];
+                var formData = new FormData();
+                formData.append("file", file);
+                $.ajax({
+                    url: "/upload",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        if (response.file) {
+                            $("#avatar").attr("src", response.file);
+                        }
+                        $('#modalBody').html(response.message);
+                        $('#messageModal').modal('show');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        $('#modalBody').html(error);
+                        $('#messageModal').modal('show');
+                    }
+                });
+            });
+        } catch (e) {}
+        var audioList = localStorage.getItem('aplayer');
+        var audioIndex = localStorage.getItem('aplayerIndex');
+        if (audioList) {
+            audioList = JSON.parse(audioList);
+        } else {
+            audioList = [];
+        }
+        window.ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            theme: '#bb1919',
+            loop: 'all',
+            order: 'list',
+            preload: 'none',
+            mutex: true,
+            listFolded: true,
+            listMaxHeight: 50,
+            lrcType: 1,
+            audio: audioList,
+            autoplay: false
+        });
+        if (audioIndex){
+            window.ap.list.switch(parseInt(audioIndex))
+        }
+        window.ap.on('error', function () {
+            var index = window.ap.list.index
+            var song = window.ap.list.audios[index]
+            if (song.id !== undefined) {
+                console.log(song.id)
+                $.ajax({
+                    type: 'POST',
+                    url: '/music/retry',
+                    data: JSON.stringify({
+                        'id': song.id,
+                    }),
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (response) {
+                        window.ap.lrcType = 1;
+                        song['url'] = response.url;
+                        song['lrc'] = response.lyrics;
+                        window.ap.list.audios.splice(index, 1, song);
+                        _songs = window.ap.list.audios;
+                        window.ap.list.clear();
+                        window.ap.list.add(_songs)
+                        window.ap.list.switch(index);
+                        window.ap.list.index = index;
+                        upgrade_player();
+                        if(!window.ap.parse){
+                            window.ap.play();
+                        }
+                        add_playing();
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+        window.ap.on('listswitch', add_playing)
+        window.ap.on('ended', function () {
+            upgrade_player();
+            add_playing();
+        });
+        const navbar = document.getElementById("navbar");
+        const navItems = navbar.getElementsByClassName("item-link");
+        for (let i = 0; i < navItems.length; i++) {
+            const link = navItems[i];
+            if (window.location.href === link.href) {
+                link.classList.add("active");
+                break
+            }
+        }
+        $('a').on('click', function (event) {
+            event.preventDefault(); // 阻止默认的链接跳转行为
+            var url = $(this).attr('href'); // 获取链接的地址
+            var title = $(this).text(); // 获取链接的文本
+            history.pushState({url: url, title: title}, title, url); // 修改路由，不刷新页面
+            loadPage(url); // 加载新页面内容
+        });
+    });
+
+    function add_playing() {
+        try {
+            $('.files-table-row').each(function (index, row) {
+                if (window.ap.list.audios.length > 0 && window.ap.list.audios[window.ap.list.index].id === parseInt($(this).children('.name-cell').text())) {
+                    row.classList.add('is-playing');
+                } else {
+                    try {
+                        row.classList.remove('is-playing');
+                    } catch (e) {
+
+                    }
+                }
+            })
+            var targetElement = document.querySelector('.is-playing');
+            targetElement.scrollIntoView({behavior: 'smooth'});
+        } catch (e) {
+        }
+    }
+
+    function loadPage(url) {
+        var content = $('#content');
+        content.html('<section><span class="loader-1"> </span></section>'); // 显示加载动画
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            success: function (response) {
+                content.html($(response).find('#content').html()); // 更新页面内容
+                var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = response;
+                loadScripts(tempDiv.querySelectorAll('script')); // 加载新页面的脚本
+                if (url === '/user/logout') {
+                    window.location.reload();
+                }
+            },
+            error: function (xhr, status, error) {
+                content.html('<h1>Error</h1><p>' + error + '</p>');
+            }
+        });
+    }
+
+    function loadScripts(scripts) {
+        // 移除之前加载的脚本
+        $('script[src]:not([src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"], [src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"])').remove();
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js';
+        document.head.appendChild(script);
+        scripts.forEach(function (as) {
+            var src = as.src;
+            if (src !== 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js' && src !== 'https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js' && src !== 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js') {
+                var script = document.createElement('script');
+                script.src = src;
+                document.head.appendChild(script);
+            }
+        });
+    }
+
+    function upgrade_player() {
+        try {
+            // 在合适的地方调用 setLyrics 函数，传入你获取到的歌词数组
+            const lyrics = getLine();
+            if (lyrics) {
+                setLyrics(lyrics);
+            }
+            var music = window.ap.list.audios[window.ap.list.index]
+            // 获取.album-art元素的引用
+            $('.artist-name').html(music.name + '<div class="control-collect" data-song-id=""\n' +
+                '                         data-song-singer=""\n' +
+                '                         data-song-cover=""\n' +
+                '                         data-song-name="" style="position:relative;">\n' +
+                '                        <svg t="1686316931118" class="icon" viewBox="0 0 1179 1024" version="1.1"\n' +
+                '                             xmlns="http://www.w3.org/2000/svg" p-id="2619" width="25" height="25">\n' +
+                '                            <path d="M142.31918 540.267127l350.13559 373.653781c54.296613 63.852817 139.806023 63.883844 195.033436-1.054906l362.204951-388.670672c42.661625-48.866952 65.466202-112.130263 65.466203-182.902021a279.239726 279.239726 0 0 0-501.018122-169.653647 30.99561 30.99561 0 0 1-25.534922 12.131415 30.99561 30.99561 0 0 1-25.503895-12.131415A279.239726 279.239726 0 0 0 62.053272 341.293309c0 72.850542 28.792718 144.242832 77.411458 195.498835 1.054906 1.116959 1.985705 2.264944 2.85445 3.474983z m-54.606879 31.926409A349.732244 349.732244 0 0 1 0 341.293309C0 152.806494 152.806184 0.00031 341.292999 0.00031c95.065613 0 183.708713 39.155615 247.313317 106.111096A340.486306 340.486306 0 0 1 835.95066 0.00031c188.486815 0 341.292999 152.806184 341.292999 341.292999 0 80.793361-25.069522 154.636755-72.198982 213.463257-1.147986 1.923651-2.482131 3.754223-4.095516 5.491715l-5.181449 5.553768c-2.699317 3.071637-5.491715 6.112247-8.315138 9.090804-0.620533 0.620533-1.210039 1.241065-1.861598 1.799545L733.810974 954.069375c-79.055869 93.048882-209.553901 93.017855-287.616918 1.147985L90.783938 576.040839a31.243823 31.243823 0 0 1-3.102664-3.847303z"\n' +
+                '                                  fill="#d81e06" p-id="2620"></path>\n' +
+                '                        </svg>\n' +
+                '                    </div>');
+            $('.song-title').text(music.artist);
+            // 获取按钮元素
+            var button = document.querySelector('.control-collect');
+            button.setAttribute('data-song-id', music.id);
+            button.setAttribute('data-song-singer', music.artist);
+            button.setAttribute('data-song-cover', music.cover);
+            button.setAttribute('data-song-name', music.name);
+            var albumArt = document.querySelector('.album-art');
+            // 替换背景图片链接
+            albumArt.style.background = '#fff url(' + music.cover + ') center/cover no-repeat';
+            // 获取.vinyl元素的引用
+            var vinyl = document.querySelector('.vinyl');
+            // 替换背景图片链接
+            vinyl.style.backgroundImage = 'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/vinyl.png"), url(' + music.cover + ')';
+        } catch (e) {
+        }
+
+        function setLyrics(lyrics) {
+            const lyricsList = document.querySelector('.lyrics-list');
+            // 清空歌词容器
+            lyricsList.innerHTML = "";
+            // 为每一行歌词创建一个 li 元素并添加到歌词容器中
+            lyrics.forEach(lyric => {
+                const li = document.createElement("li");
+                li.textContent = lyric.content;
+                li.setAttribute("data-time", formatTime(lyric.time));
+                // 添加 flex 容器类名
+                li.classList.add("centered-li");
+                lyricsList.appendChild(li);
+            });
+        }
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            const milliseconds = Math.floor((time % 1) * 100);
+            return `${padZero(minutes)}:${padZero(seconds)}.${padZero(milliseconds)}`;
+        }
+
+        function padZero(number) {
+            return number.toString().padStart(2, "0");
+        }
+
+        function getLine() {
+            const lyricsString = window.ap.list.audios[window.ap.list.index]['lrc']
+            const regex = /\[(\d+):(\d+\.\d+)\](.*)/g;
+            const lyrics = [];
+            let match;
+            while ((match = regex.exec(lyricsString)) !== null) {
+                const minute = parseInt(match[1]);
+                const second = parseFloat(match[2]);
+                const time = minute * 60 + second;
+                const content = match[3];
+                lyrics.push({
+                    time,
+                    content
+                });
+            }
+            return lyrics
+        }
+    }
+</script>
+{% block tail %}{% endblock %}
+</html>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block body %}
+    <link id="custom-style" rel="stylesheet" href="{{ url_for('static', filename='css/style11.css') }}" type="text/css"
+          media="all"/>
+    <div class="container">
+        <div class="signinform">
+            <h1>登录</h1>
+            <!-- container -->
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="email" placeholder="邮箱..." required="" name="email">
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="password" placeholder="密码..." required="" name="password">
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">登录</button>
+                    </form>
+                    <p class="account">没有账号? <a href="{{ url_for('user.register') }}">立即注册!</a></p>
+                </div>
+
+            </div>
+            <div class="flash-message">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                {% if status == 'OK' %}
+                                    <li>
+                                        <div class="alert alert-info" role="alert">{{ message }}</div>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <div class="alert alert-danger" role="alert">{{ message }}</div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <style>
+                    .alert {
+                        padding: 15px;
+                        margin-bottom: 20px;
+                        border: 1px solid transparent;
+                        border-radius: 4px;
+                    }
+
+                    .alert-info {
+                        color: #31708f;
+                        background-color: #d9edf7;
+                        border-color: #bce8f1;
+                    }
+
+                    .alert-danger {
+                        color: #a94442;
+                        background-color: #f2dede;
+                        border-color: #ebccd1;
+                    }
+                </style>
+
+            </div>
+            <!-- //main content -->
+        </div>
+    </div>
+    <script>
+        // 获取<link>元素
+        var styleSheet = document.getElementById("custom-style");
+        // 移除或禁用<link>元素
+        if (styleSheet) {
+            // 或者使用以下代码禁用<link>元素
+            styleSheet.disabled = false;
+        }
+    </script>
+{% endblock %}

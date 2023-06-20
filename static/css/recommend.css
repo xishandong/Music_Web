@@ -1,0 +1,141 @@
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.card {
+    margin: 10px;
+    width: calc(33.33% - 20px);
+    position: relative;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card .box {
+    background: #fff;
+    height: 220px;
+    width: 100%;
+}
+
+.card .box .content {
+    position: absolute;
+    inset: 0;
+    padding: 30px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.card .box .content h2 {
+    width: 100%;
+    padding-left: 120px;
+    text-transform: uppercase;
+    font-size: 1.15em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    line-height: 1.1em;
+    color: #333;
+    overflow-y: scroll;
+    max-height: 35%;
+}
+
+.card .box .content h2 span {
+    font-size: 0.75em;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: #e91e63;
+    text-transform: initial;
+}
+
+.card .box .content ul {
+    position: relative;
+    top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding: 0 10px;
+    justify-content: space-evenly;
+}
+
+.card .box .content ul li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 10px;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #999;
+}
+
+.card .box .content ul li:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.card .box .content ul li span {
+    font-size: 1.65em;
+    color: #333;
+
+}
+
+.card .box .content button {
+    position: relative;
+    margin: 0 10px;
+    padding: 8px 30px;
+    outline: none;
+    background: #03a9f4;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 1em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 0 0 10px #fff;
+    transition: 0.5s;
+}
+
+.card .box .content button:hover {
+    letter-spacing: 0.5em;
+    background: #ff3d7f;
+}
+
+.card .box .button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.card .circle {
+    position: absolute;
+    top: 20%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 80px;
+    background: #0f0;
+    border-radius: 50%;
+}
+
+.card .circle .imgBx, .card .box .imgBx {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.card .box .imgBx {
+    border-radius: 15px;
+}
+
+.card .circle .imgBx img, .card .box .imgBx img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

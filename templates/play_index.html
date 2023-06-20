@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <div class="page-right-content"
+         style="width: 110%;background: rgb(238,174,202);
+background: linear-gradient(270deg, rgba(238,174,202,1) 30%, rgba(255,255,255,1) 100%);">
+        <div class="music-player-container is-playing">
+            <div class="music-player">
+                <div class="player-content-container">
+                    <h1 class="artist-name">暂无播放</h1>
+                    <h3 class="song-title">暂无播放</h3>
+                    <div class="music-player-controls">
+                        <div class="control-back"></div>
+                        <div class="control-play"></div>
+                        <div class="control-forwards"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="album">
+                <div class="album-art"></div>
+                <div class="vinyl"></div>
+            </div>
+        </div>
+        <div class="lyrics-container">
+            <ul class="lyrics-list">
+                <li data-time="0:05" class="centered-li">暂无歌词</li>
+                <!-- 添加更多歌词行 -->
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="right-area-upper">
+        <div class="container11">
+            <a href="{{ url_for('user.playlists') }}" class="back"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="search-part-wrapper">
+            <h3 class="title11"
+                style="padding-bottom: 10px;padding-top: 10px;padding-left: 10px">歌单详情页</h3>
+        </div>
+        <div class="action-buttons-wrapper">
+            <button class="action-buttons btn-add-song" href="/user/add_song/collect">添加歌曲</button>
+        </div>
+    </div>
+    <div class="container22">
+        <section class="box0">
+            <div class="avatar">
+                <div class="image-container">
+                    {% if user.songs %}
+                            <img src="{{ user.songs[0].cover_url }}" alt="Your Image">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/default_cover.png') }}" alt="Your Image">
+                        {% endif %}
+                    <div class="overlay">
+                        <span class="heart"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="details">
+                <h2>我的收藏</h2>
+                <p>创作者:{{ user.username }}</p>
+                <h6>简介:</h6>
+                <p>这里存放了你的收藏歌曲~</p>
+            </div>
+        </section>
+        <section class="box1">
+            <div class="files-table">
+                <div class="files-table-header">
+                    <div class="column-header table-cell">id</div>
+                    <div class="column-header table-cell">歌曲</div>
+                    <div class="column-header table-cell">歌手</div>
+                    <div class="column-header table-cell">删除</div>
+                </div>
+                {% if user.songs %}
+                    {% for song in user.songs %}
+                        <div class="files-table-row" data-song-id="{{ song.id }}" data-song-singer="{{ song.singer }}"
+                             data-song-cover="{{ song.cover_url }}" data-song-name="{{ song.name }}"
+                             index="{{ loop.index0 }}">
+                            <div class="table-cell name-cell">{{ song.id }}</div>
+                            <div class="table-cell song-cell">{{ song.name }}</div>
+                            <div class="table-cell size-cell">{{ song.singer }}</div>
+                            <div class="table-cell action-cell">
+                                <button class="more-action1"></button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% if not user.songs %}
+                <div class="no-songs-container">
+                    <h1>暂无歌曲</h1>
+                </div>
+            {% endif %}
+        </section>
+    </div>
+    <!-- 消息弹窗确定取消 -->
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="confirmLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmLabel">消息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="confirmBody">
+                </div>
+                <div class="modal-footer base">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButton">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/playlist_index.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="right-area-upper">
+        <h3 style="padding-bottom: 10px;padding-top: 10px;text-align: center;">播放列表</h3>
+    </div>
+    <div class="page-right-content">
+        <div class="files-table">
+            <div class="files-table-header">
+                <div class="column-header table-cell">id</div>
+                <div class="column-header table-cell">歌曲</div>
+                <div class="column-header table-cell">歌手</div>
+                <div class="column-header table-cell">删除</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/playlist.js') }}"></script>
+{% endblock %}

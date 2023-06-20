@@ -1,0 +1,92 @@
+2023-06-17 10:50:27,459 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:28,707 INFO: <Song (transient 1662988721624)>
+2023-06-17 10:50:29,837 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:31,160 INFO: <Song (transient 1662988906848)>
+2023-06-17 10:50:32,656 INFO: <Song (transient 1662988444056)>
+2023-06-17 10:50:33,780 INFO: <Song (transient 1662988443944)>
+2023-06-17 10:50:34,953 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:36,106 INFO: <Song (transient 1662988906848)>
+2023-06-17 10:50:37,210 INFO: <Song (transient 1662988906568)>
+2023-06-17 10:50:38,219 INFO: <Song (transient 1662988965144)>
+2023-06-17 10:50:39,336 INFO: <Song (transient 1662988906848)>
+2023-06-17 10:50:40,501 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:41,714 INFO: <Song (transient 1662988906568)>
+2023-06-17 10:50:42,828 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:43,953 INFO: <Song (transient 1662988965704)>
+2023-06-17 10:50:45,014 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:46,153 INFO: <Song (transient 1662988906568)>
+2023-06-17 10:50:47,213 INFO: <Song (transient 1662988312080)>
+2023-06-17 10:50:48,286 INFO: <Song (transient 1662988718152)>
+2023-06-17 10:50:49,498 INFO: <Song (transient 1662988444056)>
+2023-06-17 10:50:50,657 INFO: <Song (transient 1662988965256)>
+2023-06-17 10:50:51,893 INFO: <Song (transient 1662986913216)>
+2023-06-17 10:50:53,012 INFO: <Song (transient 1662988906568)>
+2023-06-17 10:50:54,077 INFO: <Song (transient 1662988721624)>
+2023-06-17 10:50:55,294 INFO: <Song (transient 1662988966488)>
+2023-06-17 23:43:23,424 ERROR: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-17 23:43:23,445 ERROR: ajax_request: Traceback (most recent call last):
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\connectionpool.py", line 700, in urlopen
+    self._prepare_proxy(conn)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\connectionpool.py", line 996, in _prepare_proxy
+    conn.connect()
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\connection.py", line 369, in connect
+    self.sock = conn = self._connect_tls_proxy(hostname, conn)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\connection.py", line 510, in _connect_tls_proxy
+    ssl_context=ssl_context,
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\util\ssl_.py", line 453, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\util\ssl_.py", line 495, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\ssl.py", line 407, in wrap_socket
+    _context=self, _session=session)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\ssl.py", line 817, in __init__
+    self.do_handshake()
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\ssl.py", line 1077, in do_handshake
+    self._sslobj.do_handshake()
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\ssl.py", line 689, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:852)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\adapters.py", line 450, in send
+    timeout=timeout
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\connectionpool.py", line 788, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\urllib3\util\retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\music_demo\crawl_model\wangyi.py", line 56, in ajax_request
+    data=data, timeout=10).json()
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\api.py", line 117, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\sessions.py", line 529, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\sessions.py", line 645, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\dongxishan\.conda\envs\APP\lib\site-packages\requests\adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+
+2023-06-18 10:32:08,596 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:13,806 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:19,048 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:24,253 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:29,513 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:46,065 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:51,287 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:32:56,638 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:33:01,877 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 10:33:07,087 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 11:04:13,169 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/cloudsearch/get/web?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 14:43:27,243 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 14:43:29,495 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 14:43:31,737 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))
+2023-06-18 14:43:32,478 ERROR: ajax_request: HTTPSConnectionPool(host='music.163.com', port=443): Max retries exceeded with url: /weapi/song/enhance/player/url/v1?csrf_token=d5e1f281f7b6f7ff2caf0af810f347d7 (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:852)'),))

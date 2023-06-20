@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <style>
+        .play-btn:hover {
+            color: red;
+        }
+
+        .delete-icon-hs:hover {
+            color: red;
+        }
+    </style>
+    <div class="right-area-upper">
+        <h3 style="padding-bottom: 10px;padding-top: 10px;text-align: center;">播放历史记录</h3>
+    </div>
+    <div class="history-list">
+        {% if history %}
+            {% for song in history %}
+                <div class="song-card">
+                    <img src="{{ song[1].cover_url }}" alt="{{ song[1].name }}">
+                    <div class="song-details">
+                        <h5 style="text-align: center;overflow-y: scroll;max-height: 50px;">{{ song[1].name }}</h5>
+                        <p>歌手：{{ song[1].singer }}</p>
+                        <p>播放次数：{{ song[0].times }}</p>
+                    </div>
+                    <button class="play-btn" data-song-id="{{ song[1].id }}" data-song-type="wy"
+                            data-song-singer="{{ song[1].singer }}"
+                            data-song-cover="{{ song[1].cover_url }}"
+                            data-song-name="{{ song[1].name }}">
+                        <i class="fa fa-play" style="position:absolute;float: left;font-size: large;bottom: 10px;"></i>
+                    </button>
+                    <button class="delete-icon-hs" data-song-id="{{ song[1].id }}">
+                        <i class="fa fa-trash-o"
+                           style="font-size: large;position:absolute;left: 150px;bottom: 10px;"></i>
+                    </button>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3 style="margin-top: 20%;color: indianred;">暂无播放记录</h3>
+        {% endif %}
+    </div>
+{% endblock %}

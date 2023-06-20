@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <style>
+        .container11 {
+            display: flex;
+            align-items: center;
+        }
+
+        .title11 {
+            display: inline-block;
+            margin-right: 10px; /* 可以根据需要调整间距 */
+        }
+
+        .back {
+            margin-left: 10px;
+            display: inline-block;
+            font-size: large;
+        }
+
+        .back:hover {
+            color: indianred;
+            font-size: xx-large;
+        }
+
+        .collect-btn {
+            float: right;
+            font-size: large;
+        }
+
+        .song:hover .collect-btn {
+            color: #ff0000;
+            font-size: x-large;
+        }
+    </style>
+    <div class="right-area-upper">
+        <button class="menu-button">
+            <svg width="24" height="24" fill="none" stroke="#51a380" stroke-linecap="round" stroke-linejoin="round"
+                 stroke-width="2">
+                <defs/>
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+        </button>
+        <form id="search-form" class="search-part-wrapper" action="{{ url_for('music.search') }}">
+            <input class="search-input" type="text" placeholder="搜索歌曲......" name="query">
+        </form>
+    </div>
+    <div class="container11">
+        <a href="{{ url_for('hello_world') }}" class="back"><i class="fa fa-arrow-left"></i></a>
+        <h3 class="title11"
+            style="padding-bottom: 10px;padding-top: 10px;padding-left: 10px">{{ query }}----搜索结果</h3>
+    </div>
+    {% if items %}
+        <div class="song-content">
+            {% for i in items %}
+                <div class="song">
+                    <img src="{{ i.cover_url }}">
+                    <div class="info">
+                        <div class="title">{{ i.name }}</div>
+                        <div class="artist">{{ i.singer }}-----{{ i.id }}
+                            <button class="play-btn" data-song-id="{{ i.id }}" data-song-type="wy"
+                                    data-song-singer="{{ i.singer }}"
+                                    data-song-cover="{{ i.cover_url }}"
+                                    data-song-name="{{ i.name }}"
+                            ><i class="fa fa-play"></i></button>
+                            <button class="collect-btn" data-song-id="{{ i.id }}"
+                                    data-song-singer="{{ i.singer }}"
+                                    data-song-cover="{{ i.cover_url }}"
+                                    data-song-name="{{ i.name }}">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h5 style="text-align: center">暂无结果</h5>
+    {% endif %}
+        <script>
+    // 获取表单元素
+        var form = document.getElementById("search-form");
+        // 监听表单提交事件
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // 阻止表单默认提交行为
+            var query = form.elements["query"].value;
+            var content = $('#content');
+            content.html('<section><span class="loader-1"> </span></section>'); // 显示加载动画
+            $.ajax({
+                url: '/music/search',
+                method: "POST",
+                data: JSON.stringify({
+                    'query': query
+                }),
+                contentType: 'application/json;charset=UTF-8',
+                success: function (response) {
+                    content.html($(response).find('#content').html()); // 更新页面内容
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = response;
+                    loadScripts(tempDiv.querySelectorAll('script')); // 加载新页面的脚本
+                },
+                error: function (xhr, status, error) {
+                    content.html('<h1>Error</h1><p>' + error + '</p>');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}

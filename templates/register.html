@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+
+{% block body %}
+    <link id="custom-style" rel="stylesheet" href="{{ url_for('static', filename='css/style11.css') }}" type="text/css"
+          media="all"/>
+    <div class="signinform">
+        <h1>注册</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="email" placeholder="邮箱..." required="" name="email">
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="text" placeholder="用户名..." required="" name="username">
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="password" placeholder="密码..." required="" name="password">
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <span><i class="fa fa-key" aria-hidden="true"></i></span>
+                            <label>
+                                <input type="password" placeholder="确认密码..." required="" name="password_confirm">
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">注册</button>
+                    </form>
+                    <p class="account">已经有帐号了? <a href="{{ url_for('user.login') }}">去登陆!</a></p>
+                </div>
+            </div>
+            <!-- //main content -->
+            <div class="flash-message">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                {% if status == 'OK' %}
+                                    <li>
+                                        <div class="alert alert-info" role="alert">{{ message }}</div>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <div class="alert alert-danger" role="alert">{{ message | safe }}</div>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <style>
+                    .alert {
+                        padding: 15px;
+                        margin-bottom: 20px;
+                        border: 1px solid transparent;
+                        border-radius: 4px;
+                    }
+
+                    .alert-info {
+                        color: #31708f;
+                        background-color: #d9edf7;
+                        border-color: #bce8f1;
+                    }
+
+                    .alert-danger {
+                        color: #a94442;
+                        background-color: #f2dede;
+                        border-color: #ebccd1;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 获取<link>元素
+        var styleSheet = document.getElementById("custom-style");
+        // 移除或禁用<link>元素
+        if (styleSheet) {
+            // 或者使用以下代码禁用<link>元素
+            styleSheet.disabled = false;
+        }
+    </script>
+{% endblock %}
