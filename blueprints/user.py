@@ -139,7 +139,7 @@ def upload():
     user = User.query.filter_by(id=g.user.id).first()
     if check_file_extend(filename) and user:
         check = f'avatar-{user.id}'
-        check_avatar_exist(check)
+        check_img_exist(check)
         file.save(system + f'/music_demo/static/img/{check}-{filename}')
         user.avatar = f'img/{check}-{filename}'
         try:
@@ -349,7 +349,7 @@ def delete_playlist():
     playlist = Playlist.query.filter_by(id=id).first()
     if playlist.user_id == g.user.id:
         check = f'cover-{g.user.id}-{playlist.id}'
-        check_avatar_exist(check)
+        check_img_exist(check)
         db.session.delete(playlist)
         try:
             db.session.commit()
@@ -415,7 +415,7 @@ def upload_cover(id):
     if playlist.user_id == g.user.id:
         if check_file_extend(filename) and playlist:
             check = f'cover-{g.user.id}-{playlist.id}'
-            check_avatar_exist(check)
+            check_img_exist(check)
             file.save(system + f'/music_demo/static/img/{check}-{filename}')
             playlist.cover = f'img/{check}-{filename}'
             try:
@@ -451,6 +451,7 @@ def save_song2database(songs):
 
 
 def check_file_extend(filename):
+    # 检查文件拓展名，这个也可以在前端写
     extend = os.path.splitext(filename)[-1]
     if extend not in ['.jpg', '.png', '.JPG', '.PNG', '.webp', '.jpeg', '.JPEG', '.gif',
                       'GIF', '.bmp', '.BMP']:
@@ -459,7 +460,7 @@ def check_file_extend(filename):
         return True
 
 
-def check_avatar_exist(id):
+def check_img_exist(id):
     folder_path = system + '/music_demo/static/img'  # 替换为实际的文件夹路径
     # 获取文件夹中所有文件的列表
     file_list = os.listdir(folder_path)
