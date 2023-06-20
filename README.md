@@ -1,6 +1,6 @@
 ### Music Web
 
-A simple music web, use pure css, oringal js, and jinjia2 html.flask as&#x20;
+A simple music web, use pure css, js, and jinjia2 html, flask;
 
 ### install
 
@@ -14,6 +14,7 @@ pip install wtforms
 pip install jieba
 pip install werkzeug
 npm install crypto-js
+...
 ```
 
 ### useage
