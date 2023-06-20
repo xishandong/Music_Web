@@ -54,7 +54,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: 'POST',
-            url: '/user/unhs',
+            url: '/user/deleteHistory',
             data: JSON.stringify({'id': songId}),
             contentType: 'application/json;charset=UTF-8',
             success: function (response) {
