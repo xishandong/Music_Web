@@ -10,6 +10,8 @@ from exts import system
 xx = '010001'
 yy = '00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7'
 zz = '0CoJUm6Qyw8W8jud'
+OTHER_COOKIE = 'e302082b51e8da6685dbb3aaf926a6db0267b7bf2fe2b56841d31edd145a3021993166e004087dd3360b2c74791823624d9912ada5e0062f84ee70de9e8757ca6b324248e5c93b0ed4dbf082a8813684'
+
 
 def replace_lastChar(former_str):
     if len(former_str.split('?')) >= 2:
@@ -35,10 +37,10 @@ class Wangyi:
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
         }
         self.cookies = {
-            'MUSIC_U': '',
+            'MUSIC_U': '5451bcd0097d856694d08b196528b8a9e6d0aedcb45b91a04d02fb9856e6279d993166e004087dd32dd25bf607bc3137c674458b54c3b8c4b8a169e60ca9265e6b6f7b8785862331a0d2166338885bd7',
         }
         self.params = {
-            'csrf_token': '',
+            'csrf_token': 'd5e1f281f7b6f7ff2caf0af810f347d7',
         }
 
     def ajax_request(self, url, _i3x):
@@ -93,7 +95,8 @@ class Wangyi:
         }
         response = self.ajax_request('https://music.163.com/weapi/song/lyric', _i3x)
         lyric_1 = response.get('lrc', {}).get('lyric')
-        return lyric_1
+        lyric_2 = response.get('tlyric', {}).get('lyric')
+        return lyric_2 if lyric_2 else lyric_1
 
     def get_comment(self, id, times=-1):
         i3x = {
@@ -127,7 +130,11 @@ class Wangyi:
         }
         response = self.ajax_request('https://music.163.com/weapi/song/enhance/player/url/v1', i3x)
         Url = response.get("data", [{}])[0].get('url')
-        return replace_lastChar(Url) if Url else None
+        if not Url and self.cookies['MUSIC_U'] != OTHER_COOKIE:
+            self.cookies['MUSIC_U'] = OTHER_COOKIE
+            return self.get_musicUrl(mid)
+        else:
+            return replace_lastChar(Url) if Url else None
 
     def get_everyday_recommend(self):
         _i3x = {
@@ -135,6 +142,7 @@ class Wangyi:
             "total": "true",
             "csrf_token": self.params['csrf_token']
         }
+        self.cookies['MUSIC_U'] = OTHER_COOKIE
         resp = self.ajax_request(url='https://music.163.com/weapi/v2/discovery/recommend/songs', _i3x=_i3x)
         songs = resp['recommend']
         if songs:
