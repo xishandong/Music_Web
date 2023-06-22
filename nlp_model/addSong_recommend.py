@@ -11,7 +11,7 @@ DA = DictAnalysis()
 
 
 def add_song(song_id, song, singer, cover):
-    lyric = wy.get_lyric(song_id)
+    lyric = wy.get_lyric(song_id)[0]
     lyrics_list = lyric.split('\n')  # 按行切割
     lyrics_list = [line.split(']')[-1] for line in lyrics_list]  # 取出每行的歌词部分
     lyrics_score = [DA.sentiment_sentence(line) for line in lyrics_list]

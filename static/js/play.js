@@ -120,7 +120,8 @@ function play(songId, song, cover, singer) {
                         url: song.url,
                         cover: song.cover_url,
                         lrc: song.lyrics,
-                        id: song.id
+                        id: song.id,
+                        tlyrics: song.tlyrics
                     };
                 } else {
                     audio = {

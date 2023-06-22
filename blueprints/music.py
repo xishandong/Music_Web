@@ -28,8 +28,9 @@ def play():
         'singer': info['singer'],
         'cover_url': info['cover'],
         'url': url,
-        'lyrics': lyrics,
+        'lyrics': lyrics[0],
         'id': song_id,
+        'tlyrics': lyrics[1]
     }
     return jsonify({'success': 200, 'song': music, 'infos': infos})
 
@@ -57,4 +58,4 @@ def retry():
     if g.user:
         infos = history_add(song_id, 'None')
     lyrics = wy.get_lyric(song_id)
-    return jsonify({'success': 200, 'url': url, 'infos': infos, 'lyrics': lyrics})
+    return jsonify({'success': 200, 'url': url, 'infos': infos, 'lyrics': lyrics[0], 'tlyrics': lyrics[1]})

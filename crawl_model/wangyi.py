@@ -96,7 +96,7 @@ class Wangyi:
         response = self.ajax_request('https://music.163.com/weapi/song/lyric', _i3x)
         lyric_1 = response.get('lrc', {}).get('lyric')
         lyric_2 = response.get('tlyric', {}).get('lyric')
-        return lyric_2 if lyric_2 else lyric_1
+        return [lyric_1, lyric_2]
 
     def get_comment(self, id, times=-1):
         i3x = {

@@ -187,12 +187,14 @@
 }
 
 .lyrics-container {
-    overflow-y: auto;
+    overflow-y: scroll;
+    width: 400px ;
     height: 400px;
     position: absolute;
     left: 65%;
     top: 20%;
     font-size: 19px;
+    text-align: center;
 }
 
 .lyrics-list {
@@ -205,6 +207,7 @@
 }
 
 .lyrics-list li {
+    padding: 0.1em;
     color: white;
     line-height: 1.5;
 }

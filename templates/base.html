@@ -204,7 +204,8 @@
                     }
                 });
             });
-        } catch (e) {}
+        } catch (e) {
+        }
         var audioList = localStorage.getItem('aplayer');
         var audioIndex = localStorage.getItem('aplayerIndex');
         if (audioList) {
@@ -225,7 +226,7 @@
             audio: audioList,
             autoplay: false
         });
-        if (audioIndex){
+        if (audioIndex) {
             window.ap.list.switch(parseInt(audioIndex))
         }
         window.ap.on('error', function () {
@@ -244,6 +245,7 @@
                         window.ap.lrcType = 1;
                         song['url'] = response.url;
                         song['lrc'] = response.lyrics;
+                        song['tlyrics'] = response.tlyrics;
                         window.ap.list.audios.splice(index, 1, song);
                         _songs = window.ap.list.audios;
                         window.ap.list.clear();
@@ -251,7 +253,7 @@
                         window.ap.list.switch(index);
                         window.ap.list.index = index;
                         upgrade_player();
-                        if(!window.ap.parse){
+                        if (!window.ap.parse) {
                             window.ap.play();
                         }
                         add_playing();
@@ -263,10 +265,7 @@
             }
         });
         window.ap.on('listswitch', add_playing)
-        window.ap.on('ended', function () {
-            upgrade_player();
-            add_playing();
-        });
+
         const navbar = document.getElementById("navbar");
         const navItems = navbar.getElementsByClassName("item-link");
         for (let i = 0; i < navItems.length; i++) {
@@ -342,86 +341,7 @@
         });
     }
 
-    function upgrade_player() {
-        try {
-            // 在合适的地方调用 setLyrics 函数，传入你获取到的歌词数组
-            const lyrics = getLine();
-            if (lyrics) {
-                setLyrics(lyrics);
-            }
-            var music = window.ap.list.audios[window.ap.list.index]
-            // 获取.album-art元素的引用
-            $('.artist-name').html(music.name + '<div class="control-collect" data-song-id=""\n' +
-                '                         data-song-singer=""\n' +
-                '                         data-song-cover=""\n' +
-                '                         data-song-name="" style="position:relative;">\n' +
-                '                        <svg t="1686316931118" class="icon" viewBox="0 0 1179 1024" version="1.1"\n' +
-                '                             xmlns="http://www.w3.org/2000/svg" p-id="2619" width="25" height="25">\n' +
-                '                            <path d="M142.31918 540.267127l350.13559 373.653781c54.296613 63.852817 139.806023 63.883844 195.033436-1.054906l362.204951-388.670672c42.661625-48.866952 65.466202-112.130263 65.466203-182.902021a279.239726 279.239726 0 0 0-501.018122-169.653647 30.99561 30.99561 0 0 1-25.534922 12.131415 30.99561 30.99561 0 0 1-25.503895-12.131415A279.239726 279.239726 0 0 0 62.053272 341.293309c0 72.850542 28.792718 144.242832 77.411458 195.498835 1.054906 1.116959 1.985705 2.264944 2.85445 3.474983z m-54.606879 31.926409A349.732244 349.732244 0 0 1 0 341.293309C0 152.806494 152.806184 0.00031 341.292999 0.00031c95.065613 0 183.708713 39.155615 247.313317 106.111096A340.486306 340.486306 0 0 1 835.95066 0.00031c188.486815 0 341.292999 152.806184 341.292999 341.292999 0 80.793361-25.069522 154.636755-72.198982 213.463257-1.147986 1.923651-2.482131 3.754223-4.095516 5.491715l-5.181449 5.553768c-2.699317 3.071637-5.491715 6.112247-8.315138 9.090804-0.620533 0.620533-1.210039 1.241065-1.861598 1.799545L733.810974 954.069375c-79.055869 93.048882-209.553901 93.017855-287.616918 1.147985L90.783938 576.040839a31.243823 31.243823 0 0 1-3.102664-3.847303z"\n' +
-                '                                  fill="#d81e06" p-id="2620"></path>\n' +
-                '                        </svg>\n' +
-                '                    </div>');
-            $('.song-title').text(music.artist);
-            // 获取按钮元素
-            var button = document.querySelector('.control-collect');
-            button.setAttribute('data-song-id', music.id);
-            button.setAttribute('data-song-singer', music.artist);
-            button.setAttribute('data-song-cover', music.cover);
-            button.setAttribute('data-song-name', music.name);
-            var albumArt = document.querySelector('.album-art');
-            // 替换背景图片链接
-            albumArt.style.background = '#fff url(' + music.cover + ') center/cover no-repeat';
-            // 获取.vinyl元素的引用
-            var vinyl = document.querySelector('.vinyl');
-            // 替换背景图片链接
-            vinyl.style.backgroundImage = 'url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/83141/vinyl.png"), url(' + music.cover + ')';
-        } catch (e) {
-        }
 
-        function setLyrics(lyrics) {
-            const lyricsList = document.querySelector('.lyrics-list');
-            // 清空歌词容器
-            lyricsList.innerHTML = "";
-            // 为每一行歌词创建一个 li 元素并添加到歌词容器中
-            lyrics.forEach(lyric => {
-                const li = document.createElement("li");
-                li.textContent = lyric.content;
-                li.setAttribute("data-time", formatTime(lyric.time));
-                // 添加 flex 容器类名
-                li.classList.add("centered-li");
-                lyricsList.appendChild(li);
-            });
-        }
-
-        function formatTime(time) {
-            const minutes = Math.floor(time / 60);
-            const seconds = Math.floor(time % 60);
-            const milliseconds = Math.floor((time % 1) * 100);
-            return `${padZero(minutes)}:${padZero(seconds)}.${padZero(milliseconds)}`;
-        }
-
-        function padZero(number) {
-            return number.toString().padStart(2, "0");
-        }
-
-        function getLine() {
-            const lyricsString = window.ap.list.audios[window.ap.list.index]['lrc']
-            const regex = /\[(\d+):(\d+\.\d+)\](.*)/g;
-            const lyrics = [];
-            let match;
-            while ((match = regex.exec(lyricsString)) !== null) {
-                const minute = parseInt(match[1]);
-                const second = parseFloat(match[2]);
-                const time = minute * 60 + second;
-                const content = match[3];
-                lyrics.push({
-                    time,
-                    content
-                });
-            }
-            return lyrics
-        }
-    }
 </script>
 {% block tail %}{% endblock %}
 </html>
