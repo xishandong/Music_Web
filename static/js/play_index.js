@@ -4,7 +4,6 @@ $(document).ready(function () {
         recover();
     });
     upgrade_player();
-    showTranslations();
     try {
         const lyricsLines = Array.from(document.querySelectorAll('.lyrics-list li'));
         const firstLine = lyricsLines[0];
@@ -138,6 +137,7 @@ function upgrade_player() {
             setLyrics(lyric_array);
         }
         create_album();
+        showTranslations();
     } catch (e) {
     }
 
