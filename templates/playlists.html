@@ -8,9 +8,10 @@
         <div class="action-buttons-wrapper">
             <button class="action-buttons btn-add" data-toggle="modal" data-target="#createPlaylistModal2">新建歌单
             </button>
+            <button class="action-buttons btn-up" data-toggle="modal" data-target="#upload">导入歌单
+            </button>
         </div>
     </div>
-
     <!-- 新建歌单栏 -->
     {% if user %}
         <div class="song-content">
@@ -34,7 +35,11 @@
             {% if user.playlists %}
                 {% for i in user.playlists %}
                     <div class="song" data-id="{{ i.id }}" href="/user/playlist_index/{{ i.id }}">
-                        <img src="{{ url_for('static', filename=i.cover) }}" alt="">
+                        {% if i.cover[:3] == 'img' %}
+                            <img src="{{ url_for('static', filename=i.cover) }}" alt="111">
+                        {% else %}
+                            <img src="{{ i.cover }}" alt="123">
+                        {% endif %}
                         <div class="info">
                             <div class="title">{{ i.name }}</div>
                             <div class="artist1">{{ i.description }}</div>
@@ -70,6 +75,32 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                         <button type="button" class="btn btn-primary" id="createPlaylistButton2">创建</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="upload" tabindex="-1" role="dialog"
+             aria-labelledby="createPlaylistModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="upload">新建歌单</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createPlaylistForm">
+                            <div class="row">
+                                <input type="text" class="form-control" id="playlistId" name="playlistId" required
+                                       placeholder="请输入网易云歌单id...">
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="uploadId">添加</button>
                     </div>
                 </div>
             </div>

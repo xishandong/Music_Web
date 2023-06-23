@@ -83,7 +83,7 @@ class Wangyi:
                 'singer': song.get('ar', [{}])[0].get('name'),
                 'album': song.get('al', {}).get('name'),
                 'cover_url': song.get('al', {}).get('picUrl')
-            } for song in songs]
+            } for song in songs if song['privilege']['plLevel'] != 'none']
 
     def get_lyric(self, id):
         _i3x = {
@@ -152,3 +152,46 @@ class Wangyi:
                 'album': song.get('album', {}).get('name'),
                 'cover_url': song.get('album', {}).get('picUrl')
             } for song in songs]
+
+    def get_playlist(self, id):
+        _13x = {
+            "id": id,
+            "offset": "0",
+            "total": "true",
+            "limit": "1000",
+            "n": "1000",
+            "csrf_token": "508c083446f6d2a008125d9c7a02db50"
+        }
+        resp = self.ajax_request('https://music.163.com/weapi/v6/playlist/detail', _13x)
+        playlist = resp.get('playlist', {})
+        playlist_name = playlist.get('name')
+        playlist_description = playlist.get('description')
+        playlist_creator = playlist.get('creator', {}).get('nickname')
+        playlist_cover = playlist.get('coverImgUrl')
+        playlist_songs = playlist.get('tracks')
+        privileges = resp.get('privileges')
+        if not privileges:
+            return {}
+        privileges_list = [{
+            'id': privilege.get('id'),
+            'plLevel': privilege.get('plLevel'),
+        } for privilege in privileges]
+        songs = [{
+            'id': song.get('id'),
+            'name': song.get('name'),
+            'singer': song.get('ar', [{}])[0].get('name'),
+            'album': song.get('al', {}).get('name'),
+            'cover_url': song.get('al', {}).get('picUrl')
+        } for song, plLevel in zip(playlist_songs, privileges_list) if plLevel['plLevel'] != 'none']
+        return {
+            'name': playlist_name,
+            'cover': playlist_cover,
+            'songs': songs,
+            'creator': playlist_creator,
+            'description': playlist_description,
+        }
+
+
+if __name__ == '__main__':
+    wy = Wangyi()
+    print(wy.get_playlist(12))

@@ -5,22 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5e8a0ae-5ce4-4012-8ac5-e764369c3fab" name="变更" comment="变更">
-      <change beforePath="$PROJECT_DIR$/.idea/music_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/music_demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README_img/img_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README_img/img_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README_img/img_13.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blueprints/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/music.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crawl_model/wangyi.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawl_model/wangyi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nlp_model/addSong_recommend.py" beforeDir="false" afterPath="$PROJECT_DIR$/nlp_model/addSong_recommend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/play.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/play.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/avatar-1-img2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/play.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/create_playlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/create_playlist.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/play_index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/play_index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/play_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/play_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/playlist_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/playlist_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/playlists.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/playlists.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,19 +62,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\music_demo\static\css" />
+    </key>
+  </component>
   <component name="RunManager" selected="Flask 服务器.music_demo">
+    <configuration name="wangyi.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/static/js/wangyi.js" working-dir="$PROJECT_DIR$/static/js">
+      <method v="2" />
+    </configuration>
+    <configuration name="wangyi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="music_demo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/crawl_model" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/crawl_model/wangyi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Flask" type="Python.FlaskServer" nameIsGenerated="true">
       <option name="flaskDebug" value="true" />
       <module name="music_demo" />
@@ -69,7 +120,7 @@
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="C:\Users\dongxishan\.conda\envs\APP\python.exe" />
       <option name="SDK_NAME" value="APP" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -86,7 +137,7 @@
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="C:\Users\dongxishan\.conda\envs\APP\python.exe" />
       <option name="SDK_NAME" value="APP" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -97,7 +148,15 @@
     <list>
       <item itemvalue="Flask 服务器.Flask" />
       <item itemvalue="Flask 服务器.music_demo" />
+      <item itemvalue="Node.js.wangyi.js" />
+      <item itemvalue="Python.wangyi" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.wangyi" />
+        <item itemvalue="Node.js.wangyi.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -109,7 +168,9 @@
       <workItem from="1687261696610" duration="772000" />
       <workItem from="1687330231002" duration="24000" />
       <workItem from="1687362818230" duration="523000" />
-      <workItem from="1687402246850" duration="5223000" />
+      <workItem from="1687402246850" duration="8287000" />
+      <workItem from="1687437789828" duration="8388000" />
+      <workItem from="1687489186575" duration="8962000" />
     </task>
     <servers />
   </component>
@@ -128,11 +189,12 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/music_demo$music_demo.coverage" NAME="music_demo 覆盖结果" MODIFIED="1687403053212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/music_demo$music_demo.coverage" NAME="music_demo 覆盖结果" MODIFIED="1687500889263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/music_demo$exts.coverage" NAME="exts 覆盖结果" MODIFIED="1686558166047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/music_demo$hhh.coverage" NAME="hhh 覆盖结果" MODIFIED="1685575593388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawl_model" />
     <SUITE FILE_PATH="coverage/music_demo$Flask.coverage" NAME="Flask 覆盖结果" MODIFIED="1687253605556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/music_demo$Flask__app_py_.coverage" NAME="Flask (app.py) 覆盖结果" MODIFIED="1686578415276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/music_demo$text.coverage" NAME="text 覆盖结果" MODIFIED="1686641672658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/music_demo$wangyi.coverage" NAME="wangyi 覆盖结果" MODIFIED="1687441076289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/crawl_model" />
   </component>
 </project>
