@@ -17,7 +17,11 @@
     <div class="container22">
         <section class="box0">
             <div class="avatar">
-                <img src="{{ url_for('static', filename=playlist.cover) }}" alt="">
+                {% if playlist.cover[:3] == 'img' %}
+                    <img src="{{ url_for('static', filename=playlist.cover) }}" alt="">
+                {% else %}
+                    <img src="{{ playlist.cover }}" alt="">
+                {% endif %}
             </div>
             <div class="details">
                 <h2>{{ playlist.name }}</h2>
@@ -39,7 +43,8 @@
                 {% if playlist.songs %}
                     {% for song in playlist.songs %}
                         <div class="files-table-row" data-song-id="{{ song.id }}" data-song-singer="{{ song.singer }}"
-                             data-song-cover="{{ song.cover_url }}" data-song-name="{{ song.name }}" index="{{ loop.index0 }}">
+                             data-song-cover="{{ song.cover_url }}" data-song-name="{{ song.name }}"
+                             index="{{ loop.index0 }}">
                             <div class="table-cell name-cell">{{ song.id }}</div>
                             <div class="table-cell song-cell">{{ song.name }}</div>
                             <div class="table-cell size-cell">{{ song.singer }}</div>

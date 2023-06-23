@@ -74,3 +74,9 @@ you need edit two files,first is wangyi.py in crawl_model dir, add your cookie. 
 ##### Login and Register Page
 ![img.png](README_img/img_9.png)
 ![img.png](README_img/img_10.png)
+##### upload playlist from wangyi music
+![img.png](README_img/img_11.png)
+![img.png](README_img/img_12.png)
+##### show transition
+![img.png](README_img/img_13.png)
+![img.png](README_img/img_14.png)

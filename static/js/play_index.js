@@ -4,7 +4,6 @@ $(document).ready(function () {
         recover();
     });
     upgrade_player();
-    showTranslations();
     try {
         const lyricsLines = Array.from(document.querySelectorAll('.lyrics-list li'));
         const firstLine = lyricsLines[0];
@@ -138,6 +137,7 @@ function upgrade_player() {
             setLyrics(lyric_array);
         }
         create_album();
+        showTranslations();
     } catch (e) {
     }
 
@@ -182,8 +182,7 @@ function upgrade_player() {
         while ((match = regex.exec(lyricsString)) !== null) {
             const minute = parseInt(match[1]);
             const second = parseFloat(match[2]);
-            const time0 = minute * 60 + second;
-            time = Math.floor(time0 * 100) / 100;
+            const time = minute * 60 + second;
             const content = match[3];
             lyrics.push({
                 time,

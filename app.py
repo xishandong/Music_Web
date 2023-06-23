@@ -24,7 +24,7 @@ app.register_blueprint(user_bp)
 app.register_blueprint(music_bp)
 
 # 配置日志记录器
-handler = RotatingFileHandler('app.log', maxBytes=10240, backupCount=10)
+handler = RotatingFileHandler('app.log', maxBytes=1048576, backupCount=10)
 handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
 handler.setLevel(logging.INFO)
 app.logger.addHandler(handler)

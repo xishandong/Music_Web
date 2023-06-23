@@ -432,6 +432,33 @@ def upload_cover(id):
         return jsonify({'success': 500, 'message': '错误操作'})
 
 
+@bp.route('user/upload/playlist', methods=['POST', 'GET'])
+def uploadPlaylist():
+    id = request.form.get('id')
+    newPlaylist = wy.get_playlist(id)
+    user_id = g.user.id
+    desc = newPlaylist.get('description')
+    name = newPlaylist.get('name')
+    cover = newPlaylist.get('cover')
+    if desc and name:
+        playlist = Playlist(name=name, description=desc, user_id=user_id, cover=cover)
+    elif not desc and name:
+        playlist = Playlist(name=name, user_id=user_id, cover=cover)
+    else:
+        return jsonify({'success': 500, 'message': '错误的歌单号'})
+    db.session.add(playlist)
+    save_song2database(newPlaylist['songs'])
+    for song in newPlaylist['songs']:
+        p_s = PlaylistSong(playlist_id=playlist.id, song_id=song['id'])
+        db.session.add(p_s)
+    try:
+        db.session.commit()
+        return jsonify({'success': 200, 'message': '成功添加歌单!', 'info': playlist.id})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': 500, 'message': '数据库错误!'})
+
+
 def save_song2database(songs):
     for song in songs:
         existing_song = Song.query.filter_by(id=str(song['id'])).first()
