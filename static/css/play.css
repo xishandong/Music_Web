@@ -150,7 +150,6 @@
 }
 
 
-
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -188,19 +187,20 @@
 
 .lyrics-container {
     overflow-y: scroll;
-    width: 400px ;
+    width: 450px;
     height: 400px;
     position: absolute;
     left: 65%;
     top: 20%;
     font-size: 19px;
     text-align: center;
+    overflow-x: visible;
 }
 
 .lyrics-list {
-    overflow: hidden;
     padding: 0;
     margin: 5px;
+    overflow-x: visible;
     list-style: none;
     transition: top 1s ease; /* 增加过渡时间为0.6秒 */
     transform: translate3d(0, 0, 0); /* 添加硬件加速，提高滚动性能 */
@@ -212,9 +212,55 @@
     line-height: 1.5;
 }
 
+.lyrics-list li.centered-li {
+    position: relative;
+}
+
+.lyrics-list li.centered-li {
+    position: relative;
+}
+
+.lyrics-list li.centered-li .overlay-lyric {
+    position: absolute;
+    left: 0;
+    align-items: center;
+    display: none;
+}
+
+.lyrics-list li.centered-li .play-icon {
+    font-size: small;
+    margin-right: 15px;
+}
+
+.lyrics-list li.centered-li .timestamp {
+    font-size: small;
+    margin-left: 370px;
+}
+
+
+.lyrics-list li.centered-li:hover .overlay-lyric {
+    display: flex;
+}
+
+.lyrics-list li.centered-li:hover {
+    color: mediumpurple;
+    cursor: crosshair;
+}
+
 .lyrics-list li.current {
     color: #f4316d;
-    font-family: “Arial”,”Microsoft YaHei”,”黑体”,”宋体”,sans-serif;
+    font-family: “Arial”, ”Microsoft YaHei”, ”黑体”, ”宋体”, sans-serif;
+}
+
+.lyrics-list li.centered-li .overlay-lyric::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    width: 87%;
+    height: 1px;
+    background-color: mediumpurple;
+    opacity: 0.5;
 }
 
 @keyframes scaleUp {
