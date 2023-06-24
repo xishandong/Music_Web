@@ -76,7 +76,7 @@ $(document).ready(function () {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(function () {
                 window.isScrolling = false;
-            }, 1000);
+            }, 2000);
         }
 
         document.querySelector('.lyrics-container').addEventListener('scroll', handleScroll);
@@ -138,7 +138,14 @@ function upgrade_player() {
         }
         create_album();
         showTranslations();
+        $('.lyrics-list li.centered-li .play-icon').click(function () {
+            window.ap.seek($(this).data("time"));
+            if (window.ap.audio.paused) {
+                window.ap.play();
+            }
+        })
     } catch (e) {
+        console.log(e)
     }
 
     function setLyrics(lyrics) {
@@ -147,7 +154,7 @@ function upgrade_player() {
         // 为每一行歌词创建一个 li 元素并添加到歌词容器中
         lyrics.forEach(lyric => {
             const li = document.createElement("li");
-            const t_li = document.createElement("li")
+            const t_li = document.createElement("li");
             li.textContent = lyric.content;
             if (lyric.translate) {
                 t_li.textContent = lyric.translate;
@@ -155,8 +162,24 @@ function upgrade_player() {
                 t_li.classList.add("translate");
             }
             li.setAttribute("data-time", formatTime(lyric.time));
-            // 添加 flex 容器类名
             li.classList.add("centered-li");
+            div = document.createElement("div");
+            div.classList.add("overlay-lyric");
+            child_div_1 = document.createElement("div");
+            child_div_1.classList.add('play-icon');
+            i = document.createElement("i");
+            i.classList.add('fa');
+            i.classList.add('fa-play');
+            child_div_1.setAttribute("data-time", lyric.time);
+            child_div_1.appendChild(i);
+            child_div_2 = document.createElement("div");
+            child_div_2.classList.add('timestamp');
+            times = formatTime(lyric.time).split('.')
+            child_div_2.textContent = times[0];
+            div.appendChild(child_div_1);
+            div.appendChild(child_div_2);
+            li.appendChild(div);
+
             lyricsList.appendChild(li);
             if (lyric.translate) {
                 lyricsList.appendChild(t_li);
